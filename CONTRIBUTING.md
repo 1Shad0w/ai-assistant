@@ -67,3 +67,4 @@ Ejemplo: `feat(llm-client): parsear deltas SSE de tool calls`.
 ## Licencia
 
 Al contribuir aceptas que tu aportación se licencia bajo [MIT](LICENSE).
+

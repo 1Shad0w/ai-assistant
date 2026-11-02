@@ -236,3 +236,4 @@ mod tests {
         assert!(matches!(err, AssistantError::Io(_)));
     }
 }
+

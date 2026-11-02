@@ -78,3 +78,4 @@ La configuración MCP (`.agents/mcp_config.json`) restringe el servidor de archi
 ## Contribuir
 
 Lee [CONTRIBUTING.md](CONTRIBUTING.md). Licencia [MIT](LICENSE).
+
