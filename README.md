@@ -7,7 +7,7 @@ Asistente autónomo de alto rendimiento, de código abierto y multiplataforma (W
 - **Herramientas vía MCP**: servidores Model Context Protocol por stdio (Google Workspace, Puppeteer, sistema de archivos, OmniRoute).
 - **UI desacoplada**: Tauri v2 en la fase final; el backend solo expone canales IPC asíncronos.
 
-> Estado: **Fase 3** (orquestador MCP). Los crates de voz y runtime son esqueletos.
+> Estado: **Fase 4** (motor de voz local). El runtime es un esqueleto.
 
 ## Arquitectura
 
@@ -45,7 +45,7 @@ Asistente autónomo de alto rendimiento, de código abierto y multiplataforma (W
 
 | Herramienta | Versión | Uso |
 |---|---|---|
-| Rust (stable) | ≥ 1.75 | Compilar el workspace |
+| Rust (stable) | ≥ 1.88 | Compilar el workspace |
 | CMake | ≥ 3.20 | Compilar whisper.cpp (fase 4) |
 | Node.js | ≥ 18 | Servidores MCP vía `npx` |
 | OmniRoute | última | Gateway LLM en `localhost:20128` |
@@ -58,6 +58,7 @@ git clone https://github.com/OWNER/ai-assistant.git && cd ai-assistant
 
 # 2. Compilar y validar
 cargo check --workspace
+scripts/download-models.sh   # modelos de voz ligeros (~120 MB)
 
 # 3. Arrancar OmniRoute y revisar la config MCP
 omniroute            # en otra terminal
@@ -71,7 +72,7 @@ La configuración MCP (`.agents/mcp_config.json`) restringe el servidor de archi
 - [x] **01** `feat/01-core-types-and-workspace`: tipos, workspace, documentación
 - [x] **02** `feat/02-cloud-llm-omniroute`: conector HTTP, parser SSE, tool calls
 - [x] **03** `feat/03-mcp-orchestrator`: subprocesos JSON-RPC y ejecución de herramientas
-- [ ] **04** `feat/04-local-voice-engine`: cpal, Silero VAD, Whisper, Piper
+- [x] **04** `feat/04-local-voice-engine`: cpal, Silero VAD, Whisper, Piper
 - [ ] **05** `feat/05-agent-runtime`: bucle Voz → LLM → MCP → Voz
 - [ ] **06** `feat/06-tauri-desktop-ui`: UI Tauri v2, atajo global, visor de estado
 
