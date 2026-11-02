@@ -10,7 +10,28 @@ authors.workspace = true
 
 [dependencies]
 core-types.workspace = true
+llm-client = { path = "../llm-client" }
+mcp-client = { path = "../mcp-client" }
+voice-engine = { path = "../voice-engine" }
+tokio.workspace = true
+serde.workspace = true
+serde_json.workspace = true
 tracing.workspace = true
+tracing-subscriber.workspace = true
+anyhow.workspace = true
+async-trait.workspace = true
+futures-util.workspace = true
+
+[features]
+default = []
+# Micrófono, altavoz y Silero VAD (sin STT).
+voice-io = ["voice-engine/mic", "voice-engine/playback", "voice-engine/silero"]
+# Modo voz completo (añade Whisper; requiere CMake).
+voice = ["voice-io", "voice-engine/whisper"]
+
+[[bin]]
+name = "assistant"
+path = "src/main.rs"
 
 [lints]
 workspace = true
