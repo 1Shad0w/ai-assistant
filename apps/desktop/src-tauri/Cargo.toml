@@ -1,0 +1,44 @@
+[package]
+name = "ai-assistant-desktop"
+version = "0.1.0"
+description = "Interfaz de escritorio (Tauri v2) del asistente"
+edition = "2021"
+rust-version = "1.88"
+license = "MIT"
+
+# Workspace propio: Tauri necesita librerías del sistema (WebKitGTK en Linux) y
+# no debe romper `cargo check --workspace` en la raíz del monorepo.
+[workspace]
+
+[lib]
+name = "ai_assistant_desktop_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[[bin]]
+name = "ai-assistant-desktop"
+path = "src/main.rs"
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = [] }
+tauri-plugin-global-shortcut = "2"
+agent-runtime = { path = "../../../crates/agent-runtime" }
+llm-client = { path = "../../../crates/llm-client" }
+mcp-client = { path = "../../../crates/mcp-client" }
+anyhow = "1"
+serde = { version = "1", features = ["derive"] }
+tokio = { version = "1", features = ["sync"] }
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+
+[features]
+default = []
+# Activa el modo voz (micrófono, Silero, Whisper, Piper). Requiere CMake.
+voice = ["agent-runtime/voice", "dep:voice-engine"]
+
+[dependencies.voice-engine]
+path = "../../../crates/voice-engine"
+optional = true
+

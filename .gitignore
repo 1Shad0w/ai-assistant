@@ -1,7 +1,12 @@
-/target
+target/
+**/target/
 Cargo.lock.bak
 .env
 *.onnx
 *.gguf
 models/
 node_modules/
+**/node_modules/
+dist/
+**/dist/
+app-icon.png
