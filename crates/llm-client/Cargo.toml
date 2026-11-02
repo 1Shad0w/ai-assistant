@@ -11,6 +11,14 @@ authors.workspace = true
 [dependencies]
 core-types.workspace = true
 tracing.workspace = true
+async-trait.workspace = true
+serde_json.workspace = true
+reqwest.workspace = true
+futures-util.workspace = true
+bytes.workspace = true
+
+[dev-dependencies]
+tokio.workspace = true
 
 [lints]
 workspace = true
