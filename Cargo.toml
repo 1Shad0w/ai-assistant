@@ -1,0 +1,37 @@
+[workspace]
+resolver = "2"
+members = [
+    "crates/core-types",
+    "crates/llm-client",
+    "crates/mcp-client",
+    "crates/voice-engine",
+    "crates/agent-runtime",
+]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.75"
+license = "MIT"
+repository = "https://github.com/OWNER/ai-assistant"
+authors = ["ai-assistant contributors"]
+
+[workspace.dependencies]
+tokio = { version = "1.40", features = ["rt-multi-thread", "macros", "sync", "time", "process", "io-util"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+thiserror = "2.0"
+tracing = "0.1"
+anyhow = "1.0"
+async-trait = "0.1"
+futures-core = "0.3"
+
+# Internal crates
+core-types = { path = "crates/core-types" }
+
+[workspace.lints.rust]
+unsafe_code = "forbid"
+missing_docs = "warn"
+
+[workspace.lints.clippy]
+unwrap_used = "deny"
