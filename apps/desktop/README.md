@@ -51,3 +51,4 @@ cd apps/desktop
 npm run tauri build
 ```
 Los ejecutables e instaladores específicos de plataforma (`.deb`, `.AppImage`, `.msi`, `.dmg`) se generan en `apps/desktop/src-tauri/target/release/bundle/`.
+
