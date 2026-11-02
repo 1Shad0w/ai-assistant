@@ -55,7 +55,7 @@ Asistente autónomo de alto rendimiento, de código abierto y multiplataforma (W
 
 ```bash
 # 1. Clonar el repositorio
-git clone https://github.com/OWNER/ai-assistant.git && cd ai-assistant
+git clone https://github.com/1Shad0w/ai-assistant.git && cd ai-assistant
 
 # 2. Compilar crates principales y descargar modelos de voz locales (~120 MB)
 cargo check --workspace
