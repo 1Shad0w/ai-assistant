@@ -11,7 +11,7 @@ members = [
 [workspace.package]
 version = "0.1.0"
 edition = "2021"
-rust-version = "1.75"
+rust-version = "1.88"
 license = "MIT"
 repository = "https://github.com/1Shad0w/ai-assistant"
 authors = ["ai-assistant contributors"]
@@ -28,6 +28,11 @@ futures-core = "0.3"
 futures-util = "0.3"
 bytes = "1"
 reqwest = { version = "0.12", default-features = false, features = ["json", "stream", "rustls-tls"] }
+
+cpal = "0.18"
+rodio = { version = "0.23", default-features = false, features = ["playback"] }
+ort = "=2.0.0-rc.15"
+whisper-rs = "0.16"
 
 # Internal crates
 core-types = { path = "crates/core-types" }

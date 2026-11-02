@@ -16,7 +16,7 @@ Nunca hagas push directo a `main` ni `develop`. Las ramas de fase se crean desde
 
 ## Entorno
 
-Rust estable (≥ 1.75), CMake y Node.js (ver [README](README.md)).
+Rust estable (≥ 1.88), CMake y Node.js (ver [README](README.md)).
 
 ## Formato (rustfmt)
 
