@@ -4,6 +4,7 @@ use std::num::NonZero;
 use std::sync::mpsc as std_mpsc;
 use std::thread::JoinHandle;
 
+use async_trait::async_trait;
 use core_types::{AssistantError, Result};
 use rodio::buffer::SamplesBuffer;
 use rodio::{DeviceSinkBuilder, Player};
@@ -79,18 +80,9 @@ impl RodioSink {
             .send(cmd)
             .map_err(|_| closed("reproducción"))
     }
-
-    /// Espera (sin bloquear el runtime) a que termine todo el audio encolado.
-    pub async fn drain(&self) -> Result<()> {
-        let (done_tx, done_rx) = std_mpsc::channel();
-        self.send(Command::Drain(done_tx))?;
-        tokio::task::spawn_blocking(move || done_rx.recv())
-            .await
-            .map_err(|e| AssistantError::Audio(format!("espera de reproducción: {e}")))?
-            .map_err(|_| closed("reproducción"))
-    }
 }
 
+#[async_trait]
 impl AudioSink for RodioSink {
     fn play(&self, samples: Vec<f32>, sample_rate: u32) -> Result<()> {
         self.send(Command::Play(samples, sample_rate))
@@ -98,6 +90,15 @@ impl AudioSink for RodioSink {
 
     fn clear(&self) {
         let _ = self.send(Command::Clear);
+    }
+
+    async fn drain(&self) -> Result<()> {
+        let (done_tx, done_rx) = std_mpsc::channel();
+        self.send(Command::Drain(done_tx))?;
+        tokio::task::spawn_blocking(move || done_rx.recv())
+            .await
+            .map_err(|e| AssistantError::Audio(format!("espera de reproducción: {e}")))?
+            .map_err(|_| closed("reproducción"))
     }
 }
 

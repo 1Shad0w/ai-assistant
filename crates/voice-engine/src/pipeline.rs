@@ -1,5 +1,6 @@
 //! Orquestación de alto nivel: escuchar un enunciado y hablar por frases.
 
+use async_trait::async_trait;
 use core_types::{Result, VoiceSynthesizer};
 use futures_util::StreamExt;
 use tokio::sync::mpsc;
@@ -8,12 +9,18 @@ use crate::text::split_sentences;
 use crate::vad::{UtteranceSegmenter, VadModel};
 
 /// Destino de audio sintetizado (altavoz, fichero, mock de test...).
+#[async_trait]
 pub trait AudioSink: Send + Sync {
     /// Encola muestras `f32` mono a `sample_rate` Hz sin bloquear.
     fn play(&self, samples: Vec<f32>, sample_rate: u32) -> Result<()>;
 
     /// Descarta el audio encolado (interrupción del usuario / *barge-in*).
     fn clear(&self) {}
+
+    /// Espera a que termine todo el audio encolado (por defecto, no espera).
+    async fn drain(&self) -> Result<()> {
+        Ok(())
+    }
 }
 
 /// Espera hasta completar un enunciado del usuario.
