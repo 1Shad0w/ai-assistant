@@ -7,7 +7,7 @@ Asistente autónomo de alto rendimiento, de código abierto y multiplataforma (W
 - **Herramientas vía MCP**: servidores Model Context Protocol por stdio (Google Workspace, Puppeteer, sistema de archivos, OmniRoute).
 - **UI desacoplada**: Tauri v2 en la fase final; el backend solo expone canales IPC asíncronos.
 
-> Estado: **Fase 1** (tipos base y workspace). Los demás crates son esqueletos.
+> Estado: **Fase 2** (conector OmniRoute). Los crates de MCP, voz y runtime son esqueletos.
 
 ## Arquitectura
 
@@ -69,7 +69,7 @@ La configuración MCP (`.agents/mcp_config.json`) restringe el servidor de archi
 ## Hoja de ruta
 
 - [x] **01** `feat/01-core-types-and-workspace`: tipos, workspace, documentación
-- [ ] **02** `feat/02-cloud-llm-omniroute`: conector HTTP, parser SSE, tool calls
+- [x] **02** `feat/02-cloud-llm-omniroute`: conector HTTP, parser SSE, tool calls
 - [ ] **03** `feat/03-mcp-orchestrator`: subprocesos JSON-RPC y ejecución de herramientas
 - [ ] **04** `feat/04-local-voice-engine`: cpal, Silero VAD, Whisper, Piper
 - [ ] **05** `feat/05-agent-runtime`: bucle Voz → LLM → MCP → Voz
